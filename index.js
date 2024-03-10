@@ -1,8 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 const { igApi, getCookie } = require('insta-fetcher');
 
 const app = express();
 const port = 3000;
+
+// Usar o middleware cors
+app.use(cors());
 
 // Rota para obter o session ID
 app.get('/session', async (req, res) => {
@@ -26,7 +30,3 @@ app.get('/session', async (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
-
-
-//exemplo de uso:
-//http://localhost:3000/session?username=devsalzinho&password=mito010894
