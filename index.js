@@ -20,7 +20,17 @@ app.get('/session', async (req, res) => {
         }
 
         const session_id = await getCookie(username, password);
+
+        // some example with proxy, but i never test it
+        let ig = new igApi(session_id, false, {
+            proxy: {
+                host: 'proxy-url',
+                port: 80,
+                auth: { username: username, password: password }
+            }
+        });
         res.json({ session_id });
+
     } catch (error) {
         console.error('Erro na solicitação:', error);
         res.status(500).json({ error: 'Erro na solicitação' });
